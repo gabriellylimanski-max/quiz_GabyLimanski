@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz do Milhão</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="jogo">
+        <header>
+            <h1>QUIZ DO MILHÃO</h1>
+            <p id="categoria">Categoria: Conhecimentos Gerais</p>
+        </header>
+        <section class="painel">
+            <!-- Bloco de Ajudas Estilo Show do Milhão -->
+            <div id="ajudas-container">
+                <button id="btn-cartas" class="botao-ajuda"> Cartas</button>
+                <button id="btn-placas" class="botao-ajuda"> Placas</button>
+                <button id="btn-universitarios" class="botao-ajuda"> Universitários</button>
+            </div>
+
+            <div class="status">
+                <span id="numero-pergunta">Pergunta 1 de 15</span>
+                <span id="premio">Prêmio: R$ 0</span>
+            </div>
+            <h2 id="pergunta">Carregando pergunta...</h2>
+            
+            <div id="alternativas"></div>
+            <p id="mensagem" class="mensagem"></p>
+            <button id="proxima" class="botao-proxima" disabled>
+                Próxima Pergunta
+            </button>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
