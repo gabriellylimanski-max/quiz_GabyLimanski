@@ -1,110 +1,94 @@
-// Array principal com as 15 perguntas do jogo (Temas variados)
+// Array principal com as 15 perguntas do jogo
 const perguntas = [
     {
         pergunta: "Qual linguagem é usada para estruturar páginas web?",
         alternativas: ["CSS", "HTML", "Python", "JavaScript"],
-        correta: 1 // HTML
+        correta: 1
     },
     {
         pergunta: "Qual é o maior país do mundo em extensão territorial?",
         alternativas: ["Canadá", "China", "Rússia", "Estados Unidos"],
-        correta: 2 // Rússia
+        correta: 2
     },
     {
         pergunta: "Qual tag HTML é usada para criar um link?",
         alternativas: ["<link>", "<a>", "<href>", "<url>"],
-        correta: 1 // <a>
+        correta: 1
     },
     {
         pergunta: "Em qual ano ocorreu o descobrimento do Brasil?",
         alternativas: ["1500", "1492", "1822", "1988"],
-        correta: 0 // 1500
+        correta: 0
     },
     {
         pergunta: "Qual propriedade CSS altera a cor do texto?",
         alternativas: ["background-color", "text-style", "color", "font-color"],
-        correta: 2 // color
+        correta: 2
     },
     {
         pergunta: "Qual é o planeta mais próximo do Sol?",
         alternativas: ["Marte", "Vênus", "Terra", "Mercúrio"],
-        correta: 3 // Mercúrio
+        correta: 3
     },
     {
         pergunta: "Como declaramos uma variável constante no JavaScript?",
         alternativas: ["const", "let", "var", "constant"],
-        correta: 0 // const
+        correta: 0
     },
     {
         pergunta: "Quantos ossos tem o corpo humano adulto em média?",
         alternativas: ["106", "206", "306", "406"],
-        correta: 1 // 206
+        correta: 1
     },
     {
         pergunta: "Qual símbolo é usado para id no CSS?",
-        alternativas: [".", "#", "\$", "*"],
-        correta: 1 // #
+        alternativas: [".", "#", "$", "*"],
+        correta: 1
     },
     {
         pergunta: "Qual é a capital atual do Brasil?",
         alternativas: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
-        correta: 2 // Brasília
+        correta: 2
     },
     {
         pergunta: "Qual elemento químico tem o símbolo 'O' na tabela periódica?",
         alternativas: ["Oxigênio", "Ouro", "Ósmio", "Ozônio"],
-        correta: 0 // Oxigênio
+        correta: 0
     },
     {
         pergunta: "Quem é o autor do famoso livro brasileiro 'Dom Casmurro'?",
         alternativas: ["Monteiro Lobato", "Clarice Lispector", "Machado de Assis", "Jorge Amado"],
-        correta: 2 // Machado de Assis
+        correta: 2
     },
     {
         pergunta: "Qual é o rio mais longo do mundo?",
         alternativas: ["Rio Nilo", "Rio Amazonas", "Rio Mississippi", "Rio Yangtze"],
-        correta: 1 // Rio Amazonas
+        correta: 1
     },
     {
         pergunta: "Quem foi o primeiro presidente do Brasil?",
         alternativas: ["Getúlio Vargas", "Dom Pedro I", "Juscelino Kubitschek", "Marechal Deodoro da Fonseca"],
-        correta: 3 // Marechal Deodoro da Fonseca
+        correta: 3
     },
     {
         pergunta: "Aproximadamente, qual é a velocidade da luz no vácuo?",
         alternativas: ["300.000 km/s", "150.000 km/s", "1.000 km/s", "1.000.000 km/s"],
-        correta: 0 // 300.000 km/s
+        correta: 0
     }
-];  
+];
 
-// Valores dos prêmios escalados para as 15 perguntas até o 1 Milhão
-const premio = [];
-premio.push(1000);
-premio.push(5000);
-premio.push(10000);
-premio.push(20000);
-premio.push(30000);
-premio.push(40000);
-premio.push(50000);
-premio.push(100000);
-premio.push(200000);
-premio.push(300000);
-premio.push(400000);
-premio.push(500000);
-premio.push(600000);
-premio.push(800000);
-premio.push(1000000);
-
+// Valores dos prêmios escalados para as 15 perguntas
+const premio = [1000, 5000, 10000, 20000, 30000, 40000, 50000, 100000, 200000, 300000, 400000, 500000, 600000, 800000, 1000000];
 
 let perguntaAtual = 0;
 let premioAtual = 0;
 let respondeu = false;
 
-// Controle de uso das ajudas (só podem ser usadas uma vez por jogo)
 let usouCartas = false;
 let usouPlacas = false;
 let usouUniversitarios = false;
 
+// Seleção de Elementos DOM
 const perguntaE = document.getElementById("pergunta");
 const alternativasE = document.getElementById("alternativas");
 const mensagemE = document.getElementById("mensagem");
@@ -116,13 +100,12 @@ const btnCartas = document.getElementById("btn-cartas");
 const btnPlacas = document.getElementById("btn-placas");
 const btnUniversitarios = document.getElementById("btn-universitarios");
 
-function carregarPergunta(){
+function carregarPergunta() {
     respondeu = false;
     proximaE.disabled = true;
     mensagemE.textContent = "";
     alternativasE.innerHTML = "";
 
-    // Atualiza o estado visual dos botões de ajuda
     btnCartas.disabled = usouCartas;
     btnPlacas.disabled = usouPlacas;
     btnUniversitarios.disabled = usouUniversitarios;
@@ -144,11 +127,10 @@ function carregarPergunta(){
     });
 }
 
-function verificarResposta(indiceEscolhido, botaoEscolhido){
+function verificarResposta(indiceEscolhido, botaoEscolhido) {
     if (respondeu) return;
     respondeu = true;
 
-    // Desativa as ajudas ao responder
     btnCartas.disabled = true;
     btnPlacas.disabled = true;
     btnUniversitarios.disabled = true;
@@ -158,23 +140,31 @@ function verificarResposta(indiceEscolhido, botaoEscolhido){
     
     botoes.forEach(botao => botao.disabled = true);
     
-    if (indiceEscolhido === item.correta){
+    if (indiceEscolhido === item.correta) {
         botaoEscolhido.classList.add("correta");
         premioAtual = premio[perguntaAtual];
-        mensagemE.textContent = "Resposta correta! Você avançou!";
-        mensagemE.style.color = "#065f46";
+        mensagemE.textContent = "✨ Resposta correta! Você avançou!";
+        mensagemE.style.color = "#059669";
+        
+        premioE.textContent = `Prêmio: R$ ${premioAtual.toLocaleString("pt-BR")}`;
+        proximaE.disabled = false;
     } else {
         botaoEscolhido.classList.add("errada");
         botoes[item.correta].classList.add("correta");
-        mensagemE.textContent = "Você errou! Fim da linha.";
-        mensagemE.style.color = "#9f1239";
+        
+        mensagemE.textContent = "💥 Resposta errada! Você foi eliminado.";
+        mensagemE.style.color = "#ef4444";
+        
+        premioAtual = 0;
+        premioE.textContent = `Prêmio: R$ 0`;
+        
+        setTimeout(() => {
+            finalizarJogo(false);
+        }, 1500);
     }
-    
-    premioE.textContent = `Prêmio: R$ ${premioAtual.toLocaleString("pt-BR")}`;
-    proximaE.disabled = false;
 }
 
-// LÓGICA DAS AJUDAS
+// Lógica das Ajudas
 btnCartas.addEventListener("click", () => {
     if (usouCartas || respondeu) return;
     usouCartas = true;
@@ -182,19 +172,15 @@ btnCartas.addEventListener("click", () => {
 
     const item = perguntas[perguntaAtual];
     const botoes = Array.from(document.querySelectorAll(".alternativa"));
-    
-    // Filtra apenas as alternativas incorretas
     const incorretas = botoes.filter(b => parseInt(b.getAttribute("data-indice")) !== item.correta);
-    
-    // Sorteia quantas cartas remover (elimina de 0 a 3 alternativas)
-    const cartasEliminar = Math.floor(Math.random() * 4); // Gera de 0 a 3
+    const cartasEliminar = Math.floor(Math.random() * 4);
     
     if (cartasEliminar === 0) {
-        mensagemE.textContent = "Rei! Nenhuma alternativa foi eliminada!";
-        mensagemE.style.color = "#4a4e69";
+        mensagemE.textContent = "🃏 Rei! Nenhuma alternativa foi eliminada!";
+        mensagemE.style.color = "#64748b";
     } else {
-        mensagemE.textContent = `Você eliminou ${cartasEliminar} alternativa(s) errada(s)!`;
-        mensagemE.style.color = "#3b82f6";
+        mensagemE.textContent = `🃏 Você eliminou ${cartasEliminar} alternativa(s) errada(s)!`;
+        mensagemE.style.color = "#0284c7";
         for (let i = 0; i < cartasEliminar; i++) {
             if (incorretas[i]) {
                 incorretas[i].disabled = true;
@@ -211,63 +197,56 @@ btnPlacas.addEventListener("click", () => {
     btnPlacas.disabled = true;
 
     const item = perguntas[perguntaAtual];
-    let votos = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]; // Base inicial de votos
-    
-    // Adiciona uma grande vantagem de votos para a resposta correta simulando o público
+    let votos = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
     votos[item.correta] += Math.floor(Math.random() * 40) + 30; 
-    
-    // Distribui o restante aleatoriamente
     votos = votos.map(v => v + Math.floor(Math.random() * 15));
     const total = votos.reduce((a, b) => a + b, 0);
     const porcentagens = votos.map(v => Math.round((v / total) * 100));
 
-    mensagemE.style.color = "#3b82f6";
-    mensagemE.textContent = `Placas: A: ${porcentagens[0]}% | B: ${porcentagens[1]}% | C: ${porcentagens[2]}% | D: ${porcentagens[3]}%`;
+    mensagemE.style.color = "#0284c7";
+    mensagemE.textContent = `📊 Placas: A: ${porcentagens[0]}% | B: ${porcentagens[1]}% | C: ${porcentagens[2]}% | D: ${porcentagens[3]}%`;
 });
 
+// Botão de desistir do jogo voluntariamente
 btnUniversitarios.addEventListener("click", () => {
     if (usouUniversitarios || respondeu) return;
+    respondeu = true;
     usouUniversitarios = true;
-    btnUniversitarios.disabled = true;
-
-    const item = perguntas[perguntaAtual];
-    const letras = ["A", "B", "C", "D"];
-    const palpites = [];
-
-    // 3 Universitários votam (75% de chance de dar o palpite certo)
-    for (let i = 0; i < 3; i++) {
-        const acertou = Math.random() > 0.25; 
-        if (acertou) {
-            palpites.push(letras[item.correta]);
-        } else {
-            const erradas = [0, 1, 2, 3].filter(idx => idx !== item.correta);
-            const erroSorteado = erradas[Math.floor(Math.random() * erradas.length)];
-            palpites.push(letras[erroSorteado]);
-        }
-    }
-
-    mensagemE.style.color = "#3b82f6";
-    mensagemE.textContent = `Universitário 1: "${palpites[0]}" | U2: "${palpites[1]}" | U3: "${palpites[2]}"`;
+    
+    mensagemE.textContent = "🏳️ Você escolheu desistir e salvou seu dinheiro!";
+    mensagemE.style.color = "#475569";
+    
+    setTimeout(() => {
+        finalizarJogo(true);
+    }, 1000);
 });
 
 proximaE.addEventListener("click", () => {
     perguntaAtual++;
-    if (perguntaAtual < perguntas.length){
+    if (perguntaAtual < perguntas.length) {
         carregarPergunta();
     } else {
-        finalizarJogo();
+        finalizarJogo(true);
     }  
 });
 
-function finalizarJogo(){
-    perguntaE.textContent = "Fim de jogo!";
+function finalizarJogo(ganhou = true) {
     alternativasE.innerHTML = "";
-    numeroPerguntaE.textContent = "Quiz concluído";
-    mensagemE.style.color = "#ff5c8a";
-    mensagemE.textContent = `Parabéns! Você terminou com R$ ${premioAtual.toLocaleString("pt-BR")}!`;
+    numeroPerguntaE.textContent = "Fim da Partida";
+    
+    if (ganhou && premioAtual > 0) {
+        perguntaE.textContent = `🏆 FIM DE JOGO!`;
+        mensagemE.textContent = `Parabéns! Você encerrou sua jornada com R$ ${premioAtual.toLocaleString("pt-BR")}!`;
+        mensagemE.style.color = "#059669";
+    } else {
+        perguntaE.textContent = "❌ Fim de Jogo!";
+        mensagemE.textContent = "Você perdeu tudo! Que tal tentar de novo?";
+        mensagemE.style.color = "#ef4444";
+    }
 
-    proximaE.textContent = "Jogar novamente";
+    proximaE.textContent = "🔄 Jogar Novamente";
     proximaE.disabled = false;
+    proximaE.style.backgroundColor = "#3b82f6";
 
     proximaE.onclick = () => {
         perguntaAtual = 0;
@@ -275,11 +254,12 @@ function finalizarJogo(){
         usouCartas = false;
         usouPlacas = false;
         usouUniversitarios = false;
-        proximaE.textContent = "Próxima pergunta";
+        proximaE.textContent = "Próxima Pergunta";
+        proximaE.style.backgroundColor = "#10b981";
         proximaE.onclick = null;
         carregarPergunta();
     };
 }
 
-// Inicia o jogo
+// Inicia o jogo automaticamente
 carregarPergunta();
